@@ -20,19 +20,12 @@ public class RestTemplateBuilderConfig {
     @Value("${rest.template.rootUrl:http://localhost:8080}")
     private String rootUrl;
 
-    @Value("${rest.template.username:user1}")
-    private String username;
-
-    @Value("${rest.template.password:password}")
-    private String password;
-
     @Bean
     RestTemplateBuilder restTemplateBuilder(RestTemplateBuilderConfigurer configurer) {
 
         assert rootUrl != null;
 
         return configurer.configure(new RestTemplateBuilder())
-                .basicAuthentication(username, password)
                 .uriTemplateHandler(new DefaultUriBuilderFactory(rootUrl));
     }
 
